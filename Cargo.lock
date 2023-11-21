@@ -822,7 +822,7 @@ dependencies = [
 
 [[package]]
 name = "muelsyse-backend"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "actix-web",
  "clap",
