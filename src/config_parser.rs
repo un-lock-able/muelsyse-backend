@@ -23,7 +23,7 @@ impl Default for ServerConfig {
     fn default() -> Self {
         ServerConfig {
             bind_address: ServerBindAddress(String::from("127.0.0.1")),
-            bind_port: ServerLitsenPort(29030),
+            bind_port: ServerLitsenPort(2903),
         }
     }
 }
@@ -42,7 +42,7 @@ pub struct ServerLitsenPort(pub u16);
 
 impl Default for ServerLitsenPort {
     fn default() -> Self {
-        ServerLitsenPort(29030)
+        ServerLitsenPort(2903)
     }
 }
 
@@ -59,4 +59,6 @@ impl Default for DatabaseName {
 pub struct CmdArgs {
     #[arg(long, short, required = true)]
     pub config: String,
+    #[arg(long, default_value_t = false)]
+    pub init_database: bool,
 }
