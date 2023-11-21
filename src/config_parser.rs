@@ -1,4 +1,3 @@
-use actix_web::dev::Server;
 use clap::Parser;
 use serde_derive::Deserialize;
 
