@@ -18,11 +18,11 @@ struct StatusRespond {
 
 #[get("/count")]
 async fn join_count(global_count: web::Data<Arc<Mutex<i64>>>) -> HttpResponse {
-    log::info!("Returning the count");
+    // log::info!("Returning the count");
     if let Ok(count) = global_count.lock() {
         return HttpResponse::Ok().json(StatusRespond { count: *count });
     }
-    log::info!("Lock the count variable failed.");
+    log::error!("Lock the count variable failed.");
     HttpResponse::Ok().json(StatusRespond { count: 0 })
 }
 
@@ -44,7 +44,7 @@ async fn new_join(
         }
         return HttpResponse::Ok().json(StatusRespond { count: *count });
     }
-    log::info!("Lock the count variable failed.");
+    log::error!("Lock the count variable failed.");
     HttpResponse::Ok().json(StatusRespond { count: 0 })
 }
 
@@ -53,7 +53,7 @@ fn initialize_database(db_connection: &ConnectionThreadSafe) -> Result<(), sqlit
     db_connection.execute("DROP TABLE IF EXISTS count_save;")?;
     db_connection.execute("CREATE TABLE IF NOT EXISTS count_save (id INTEGER PRIMARY KEY UNIQUE, total_count INTEGER NOT null);")?;
     db_connection.execute("INSERT INTO count_save VALUES (1, 0);")?;
-    return Ok(());
+    Ok(())
 }
 
 #[actix_web::main]
