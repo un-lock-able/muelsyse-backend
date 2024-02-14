@@ -56,6 +56,7 @@ impl Default for DatabaseName {
 }
 
 #[derive(Parser)]
+#[command(author, version, about, long_about = None)]
 pub struct CmdArgs {
     #[arg(long, short, required = true)]
     pub config: String,
